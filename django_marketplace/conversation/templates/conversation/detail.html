@@ -6,10 +6,10 @@ Conversation
 {% endblock  %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl">Conversation</h1>
+<h1 class="mb-6 text-3xl items-center text-center">Conversation</h1>
 
 
-<div class="space-y-6">
+<div class="space-y-6 md:max-w-[45%] max-w-[70%] mx-auto">
     
     {% for message in conversation.messages.all %}
     <div class="p-6 flex {% if message.created_by == request.user %} bg-blue-100{% else %} bg-gray-100 {% endif %}
@@ -23,11 +23,11 @@ Conversation
         
 </div>
  
-<form method="post" action="." class="mt-6"> 
+<form method="post" action="." class="mt-6 md:max-w-[45%] max-w-[70%] mx-auto"> 
     {% csrf_token %}
 
     {{form.as_p}}
 
-    <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send </button>
+    <button class="py-4 px-8 text-lg bg-gray-500 hover:bg-gray-700 rounded-full text-white">Send</button>
 </form>
 {% endblock %}

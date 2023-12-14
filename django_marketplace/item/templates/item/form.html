@@ -4,9 +4,10 @@
 
 
 {% block content %}
-    <h1 class="mb-6 text-3xl">{{title}}</h1>
 
-    <form method="post" enctype="multipart/form-data">
+    <h1 class="mb-6 text-center text-3xl">{{title}}</h1>
+
+    <form method="post" enctype="multipart/form-data" class="md:max-w-[45%] max-w-[65%] mx-auto">
 
         {% csrf_token %}
 
@@ -21,7 +22,7 @@
     </div>
     {% endif %}
 
-    <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+    <button class="mt-6 py-4 px-8 text-lg bg-gray-500 hover:bg-gray-700 rounded-full text-white">Submit</button>
 
 </form>
 
