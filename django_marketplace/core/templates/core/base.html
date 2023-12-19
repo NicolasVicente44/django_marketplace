@@ -1,173 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>Kijango |   {% block title %}{% endblock %}</title>
-  <script defer>
-    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-  </script>
-  <style>
-    /* Add a black background color to the top navigation */
-    .topnav {
-      background-color: #333;
-      display: flex;
-      padding: 2em;
-      justify-between; /* Add this line to justify items between left and right */
-    }
-    
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Kijango | {% block title %}{% endblock %}</title>
+    <script defer>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.classList.contains("hidden")) {
+                x.classList.remove("hidden");
+            } else {
+                x.classList.add("hidden");
+            }
+        }
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-rS5iz5pgD5NkWv3K7C1+1v5ZU3S81Sd4nsCKskN+3E5TcPgLb8UFCQVTFwbp0Qzu" crossorigin="anonymous">
 
-/* Add an active class to highlight the current page */
-.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-  display: none;
-}
-
-/* Dropdown container - needed to position the dropdown content */
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-/* Style the dropdown button to fit inside the topnav */
-.dropdown .dropbtn {
-  font-size: 17px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-/* Style the dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Style the links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a dark background on topnav links and the dropdown button on hover */
-.topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
-  color: white;
-}
-
-/* Add a grey background to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Show the dropdown menu when the user moves the mouse over the dropdown button */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child), .dropdown .dropbtn {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .topnav.responsive .dropdown {float: none;}
-  .topnav.responsive .dropdown-content {position: relative;}
-  .topnav.responsive .dropdown .dropbtn {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
-}
-  </style>
 </head>
-
-<body>
-
-  <!-- Responsive Navigation Bar -->
+<body class="font-sans">
+   <div class="white text-black">
+      <div class="container mx-auto p-4 flex justify-between items-center">
+          <a href="/" class="text-black border-b border-black p-2">Kijango</a>
   
-  <div class="topnav" id="myTopnav">
-    <a href="/" class="bg-gray-500">Kijango</a>
-    <a href="/contact">Contact</a>
-    <a href="/about">About</a>
-          <a href="{% url 'item:items' %}" >Browse</a>
-          <a href="{% url 'item:new' %}" >New Item</a>
-
-
-    <div class="ml-auto dropdown">
-      
-        <button class="dropbtn">Account <i class="fa fa-caret-down"></i></button>
-
-        <div class="dropdown-content">
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'conversation:inbox' %}">Inbox</a>
-            <a href="{% url 'dashboard:index' %}">Dashboard</a>
-            <a href="{% url 'core:logout' %}">Logout</a>
-            {% else %}
-            <a href="{% url 'core:signup' %}">Sign Up</a>
-            <a href="{% url 'core:login' %}">Log In</a>
-            {% endif %}
-        </div>
-    </div>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-</div>
+          <!-- Navigation Links for Large Devices -->
+          <div class="hidden md:flex space-x-4">
+              <a href="/contact" class="hover:bg-gray-300 px-3 py-2 rounded">Contact</a>
+              <a href="/about" class="hover:bg-gray-300 px-3 py-2 rounded">About</a>
+              <a href="{% url 'item:items' %}" class="hover:bg-gray-300 px-3 py-2 rounded">Browse</a>
+              <a href="{% url 'item:new' %}" class="hover:bg-gray-300 px-3 py-2 rounded">New Item</a>
+          </div>
   
-
+          <!-- Burger Icon for Small Devices -->
+          <div class="ml-auto md:hidden">
+              <button onclick="toggleDropdown()" class="text-black hover:bg-gray-300 px-3 py-2 rounded">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                              </button>
+          </div>
+  
+          <!-- Account Dropdown for Large Devices -->
+          <div class="hidden md:flex">
+              <div id="accountDropdown" class="ml-auto hidden sm:flex space-x-4">
+                  {% if request.user.is_authenticated %}
+                      <a href="{% url 'conversation:inbox' %}" class="text-gray-800 hover:bg-gray-300 px-3 py-2 rounded">Inbox</a>
+                      <a href="{% url 'dashboard:index' %}" class="text-gray-800 hover:bg-gray-300 px-3 py-2 rounded">Dashboard</a>
+                      <a href="{% url 'core:logout' %}" class="text-gray-800 hover:bg-gray-300 px-3 py-2 rounded">Logout</a>
+                  {% else %}
+                      <a href="{% url 'core:signup' %}" class="text-gray-800 hover:bg-gray-300 px-3 py-2 rounded">Sign Up</a>
+                      <a href="{% url 'core:login' %}" class="text-gray-800 hover:bg-gray-300 px-3 py-2 rounded">Log In</a>
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+  
+      <!-- Dropdown for Small Devices -->
+      <div id="dropdownLinks" class="hidden md:hidden bg-white border rounded-md overflow-hidden shadow-xl">
+          <a href="/contact" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Contact</a>
+          <a href="/about" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">About</a>
+          <a href="{% url 'item:items' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Browse</a>
+          <a href="{% url 'item:new' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">New Item</a>
+          <!-- Account Links -->
+          {% if request.user.is_authenticated %}
+              <a href="{% url 'conversation:inbox' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Inbox</a>
+              <a href="{% url 'dashboard:index' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Dashboard</a>
+              <a href="{% url 'core:logout' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Logout</a>
+          {% else %}
+              <a href="{% url 'core:signup' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Sign Up</a>
+              <a href="{% url 'core:login' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-300">Log In</a>
+          {% endif %}
+      </div>
+  </div>
+  
+  <script>
+      function toggleDropdown() {
+          var dropdown = document.getElementById("dropdownLinks");
+          dropdown.classList.toggle("hidden");
+      }
+  </script>
+     
 
   <!-- Main Content -->
   <div class="px-4 md:px-6 py-6 text-black-500">{% block content %} {% endblock %}</div>
